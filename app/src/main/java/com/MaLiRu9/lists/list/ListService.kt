@@ -2,7 +2,7 @@ package com.MaLiRu9.lists.list
 
 import android.content.Context
 import android.util.Log
-import com.MaLiRu9.lists.item.Item
+import com.MaLiRu9.lists.list.item.Item
 import org.json.JSONArray
 import java.io.IOException
 

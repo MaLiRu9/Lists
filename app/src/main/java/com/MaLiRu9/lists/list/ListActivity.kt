@@ -2,14 +2,12 @@ package com.MaLiRu9.lists.list
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.MaLiRu9.lists.R
-import com.MaLiRu9.lists.item.Item
+import com.MaLiRu9.lists.list.item.Item
 
 class ListActivity : AppCompatActivity() {
     var list: MutableList<Item> = mutableListOf()

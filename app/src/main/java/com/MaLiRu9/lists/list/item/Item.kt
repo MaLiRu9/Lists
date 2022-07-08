@@ -1,4 +1,4 @@
-package com.MaLiRu9.lists.item
+package com.MaLiRu9.lists.list.item
 
 import java.text.SimpleDateFormat
 import java.time.Instant

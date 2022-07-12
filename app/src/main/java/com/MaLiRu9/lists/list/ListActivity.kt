@@ -3,13 +3,20 @@ package com.MaLiRu9.lists.list
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.MaLiRu9.lists.R
+import com.MaLiRu9.lists.databinding.ActivityListBinding
 import com.MaLiRu9.lists.list.item.Item
+import menu.MenuHandler
 
 class ListActivity : AppCompatActivity() {
+    private lateinit var _binding: ActivityListBinding
+    private val binding get() = _binding
+
     var list: MutableList<Item> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +38,21 @@ class ListActivity : AppCompatActivity() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }*/
+    }
+
+    // Menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var menuHandler = MenuHandler(this,"list")
+        menuHandler.itemHandler(item)
+        if (menuHandler.intent != null) {
+            startActivity(menuHandler.intent)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun addListToLayout(layout: LinearLayout) {

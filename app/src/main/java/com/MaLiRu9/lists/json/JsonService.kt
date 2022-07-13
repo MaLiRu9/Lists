@@ -4,10 +4,13 @@ import android.content.Context
 import android.util.Log
 import com.MaLiRu9.lists.list.ListService
 import com.MaLiRu9.lists.list.item.Item
+import com.google.gson.GsonBuilder
 import org.json.JSONArray
 import java.io.File
 
-class JsonService(val context:Context) {
+class JsonService(val context: Context) {
+    val folderName = "jsons"
+    val fileExtension = ".json"
 
     fun createJsonFile(name: String, copyExample: Boolean) {
         var list = mutableListOf<Item>()
@@ -17,20 +20,37 @@ class JsonService(val context:Context) {
         }
 
         //TODO validate name, validate if file exists...
-        val folder = File(context.filesDir, "jsons")
-        if (!folder.exists()) {
-            folder.mkdir()
-        }
-        val file = File(folder, name + ".json")
+        val folder = File(context.filesDir, folderName)
+        folder.mkdir()
+
+        val file = File(folder, name + fileExtension)
         file.createNewFile()
+
+        val gson = GsonBuilder().setPrettyPrinting().create()
+        val json = gson.toJson(list)
+        file.writeText(json)
     }
 
-    private fun getListFromExample():MutableList<Item> {
-        val file =context.assets.open("example.json")
+    fun getFileList(): MutableList<JsonItem> {
+        val files = mutableListOf<JsonItem>()
+
+        val folder = File(context.filesDir, folderName)
+        folder.walk().forEach {
+            if (!it.isDirectory) {
+                val item = JsonItem(it.nameWithoutExtension)
+                files.add(item)
+            }
+        }
+        return files
+    }
+
+    private fun getListFromExample(): MutableList<Item> {
+        val file = context.assets.open("example.json")
         val jsonArray = JSONArray(file.bufferedReader().use {
             it.readText()
         })
-        val list =ListService(context).parseJson(jsonArray)
+        val list = ListService(context).parseJson(jsonArray)
         return list
     }
+
 }

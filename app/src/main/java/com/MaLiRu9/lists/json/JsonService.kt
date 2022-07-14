@@ -31,7 +31,7 @@ class JsonService(val context: Context) {
         file.writeText(json)
     }
 
-    fun getFileList(): MutableList<JsonItem> {
+    fun readFileList(): List<JsonItem> {
         val files = mutableListOf<JsonItem>()
 
         val folder = File(context.filesDir, folderName)
@@ -42,6 +42,14 @@ class JsonService(val context: Context) {
             }
         }
         return files
+    }
+
+    fun updateFile(jsonfile: JsonFile): {}
+
+    fun deleteFile(fileName: String) {
+        val folder = File(context.filesDir, folderName)
+        val file = File(folder, fileName + fileExtension)
+        file.delete()
     }
 
     private fun getListFromExample(): MutableList<Item> {

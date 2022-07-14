@@ -1,6 +1,7 @@
 package com.MaLiRu9.lists.json
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,8 +19,12 @@ class JsonActivity : AppCompatActivity() {
         _binding = ActivityJsonBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        jsonList = JsonService(this).getFileList()
-        jsonListAdapter = JsonListAdapter(jsonList)
+        jsonList = JsonService(this).readFileList()
+        jsonListAdapter = JsonListAdapter(
+            jsonList,
+            { jsonItem -> itemHandler(jsonItem) },
+            { jsonItem -> deleteHandler(jsonItem) }
+        )
 
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
         binding.fileListContainer.layoutManager = layoutManager
@@ -31,10 +36,17 @@ class JsonActivity : AppCompatActivity() {
     }
 
 
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun itemHandler (jsonItem: JsonItem) {
+        Log.d("Debug", "ITEM: " +jsonItem.name)
+    }
+
+    private fun deleteHandler(jsonItem: JsonItem) {
+        var JsonService(this).deleteFile(jsonItem.name)
     }
 
     fun createJsonHandler() {

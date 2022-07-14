@@ -8,7 +8,8 @@ import menu.MenuHandler
 
 class JsonListAdapter(
     var jsonList: List<JsonItem>,
-    var clickHandler: ((jsonItem: JsonItem) -> Unit)
+    var clickHandler: ((jsonItem: JsonItem) -> Unit),
+    var deleteHandler: ((jsonItem: JsonItem) -> Unit)
 ) : RecyclerView.Adapter<JsonListAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemJsonListBinding) : RecyclerView.ViewHolder(binding.root)
@@ -24,6 +25,7 @@ class JsonListAdapter(
                 binding.root.setOnClickListener({clickHandler(this)})
                 binding.jsonItemName.text = this.name
                 binding.jsonItemSelected.isChecked = this.selected
+                binding.jsonItemRemoveBtn.setOnClickListener({deleteHandler(this)})
 
             }
         }

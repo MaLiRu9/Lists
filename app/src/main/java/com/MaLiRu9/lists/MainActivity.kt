@@ -13,9 +13,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val config = ConfigService()
+        val config = ConfigService(this)
 
-        // TODO: Check configuration and pass parameters to Login Activity if necessary
+        if (config.getFireBaseActive()) {
+            //TODO gestionar qué hacer si está activo el modo Firebase
+        } else {
+            val defaultFile = config.getDefaultFileName()
+            if (defaultFile.isNullOrBlank()) {
+                startActivity(Intent(this, JsonActivity::class.java))
+            } else {
+                val intent = Intent(this, JsonActivity::class.java)
+                intent.putExtra("fileName", defaultFile)
+                startActivity(intent)
+            }
+        }
+
         val isLogged = false
         if (isLogged) {
             startActivity(Intent(this, ListActivity::class.java).apply { })

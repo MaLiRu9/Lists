@@ -1,13 +1,13 @@
 package com.MaLiRu9.lists.list
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.MaLiRu9.lists.R
 import com.MaLiRu9.lists.databinding.ActivityListBinding
 import com.MaLiRu9.lists.list.item.Item
@@ -17,17 +17,21 @@ class ListActivity : AppCompatActivity() {
     private lateinit var _binding: ActivityListBinding
     private val binding get() = _binding
 
-    var list: MutableList<Item> = mutableListOf()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        _binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_list)
 
-        //Load list
-        val listLayout = findViewById<LinearLayout>(R.id.listLayout)
-        val listService = ListService(this)
-        list = listService.list
-        addListToLayout(listLayout)
+        val list = ListService(this).list
+        val listAdapter = ListAdapter(
+            list,
+            { item, pos -> moveHandler(item, pos) },
+            { item, pos -> editHandler(item, pos) }
+        )
+
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
+        binding.listContainer.layoutManager = layoutManager
+        binding.listContainer.adapter = listAdapter
 
         //New Item Fragment
         /*val newItem = findViewById<Button>(R.id.newButton)
@@ -40,6 +44,14 @@ class ListActivity : AppCompatActivity() {
         }*/
     }
 
+    private fun editHandler(item: Item, pos: Int) {
+
+    }
+
+    private fun moveHandler(item: Item, pos: Int) {
+
+    }
+
     // Menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
@@ -47,23 +59,12 @@ class ListActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var menuHandler = MenuHandler(this,"list")
+        var menuHandler = MenuHandler(this, "list")
         menuHandler.itemHandler(item)
         if (menuHandler.intent != null) {
             startActivity(menuHandler.intent)
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun addListToLayout(layout: LinearLayout) {
-        list.forEach {
-            var itemView = LayoutInflater.from(this).inflate(R.layout.item_layout, null, false)
-            itemView.findViewById<CheckBox>(R.id.checkbox).isChecked = it.check
-            itemView.findViewById<TextView>(R.id.title).text = it.title
-            itemView.findViewById<TextView>(R.id.description).text = it.description
-            itemView.findViewById<TextView>(R.id.date).text = it.getFormattedDate()
-            layout.addView(itemView)
-        }
     }
 
     private fun addItemToLayout(text: String) {

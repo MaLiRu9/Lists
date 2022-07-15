@@ -2,6 +2,7 @@ package com.MaLiRu9.lists.json
 
 import android.content.Context
 import android.util.Log
+import com.MaLiRu9.lists.config.ConfigService
 import com.MaLiRu9.lists.list.ListService
 import com.MaLiRu9.lists.list.item.Item
 import com.google.gson.GsonBuilder
@@ -22,6 +23,7 @@ class JsonService(val context: Context) {
         //TODO validate name, validate if file exists...
         val folder = File(context.filesDir, folderName)
         folder.mkdir()
+        Log.d("Debug", "PATH: " + folder.path + " FILESDIR: " + context.filesDir)
 
         val file = File(folder, name + fileExtension)
         file.createNewFile()
@@ -33,23 +35,44 @@ class JsonService(val context: Context) {
 
     fun readFileList(): List<JsonItem> {
         val files = mutableListOf<JsonItem>()
+        val configService = ConfigService(context)
+        val defaultFileName = configService.getDefaultFileName()
 
         val folder = File(context.filesDir, folderName)
         folder.walk().forEach {
             if (!it.isDirectory) {
-                val item = JsonItem(it.nameWithoutExtension)
+                val item = JsonItem(
+                    it.nameWithoutExtension,
+                    it.nameWithoutExtension == defaultFileName
+                )
                 files.add(item)
             }
         }
         return files
     }
 
-    fun updateFile(jsonfile: JsonFile): {}
+    fun updateFile(jsonfile: JsonFile) {}
 
-    fun deleteFile(fileName: String) {
+    fun deleteFile(json: JsonItem) {
         val folder = File(context.filesDir, folderName)
-        val file = File(folder, fileName + fileExtension)
+        val file = File(folder, json.name + fileExtension)
         file.delete()
+        if (json.selected) {
+            val configService = ConfigService(context)
+            configService.setDefaultFileName("")
+        }
+    }
+
+    fun selectFile(list: List<JsonItem>, item: JsonItem) {
+        val configService = ConfigService(context)
+        configService.setDefaultFileName(item.name)
+        list.forEach {
+            it.selected = it.name == item.name
+        }
+    }
+
+    fun getSelectedIndex(list: List<JsonItem>): Int {
+        return list.indexOfFirst { jsonItem -> jsonItem.selected }
     }
 
     private fun getListFromExample(): MutableList<Item> {

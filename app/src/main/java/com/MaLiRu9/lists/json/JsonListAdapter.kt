@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.MaLiRu9.lists.databinding.ItemJsonListBinding
-import menu.MenuHandler
 
 class JsonListAdapter(
     var jsonList: List<JsonItem>,
-    var clickHandler: ((jsonItem: JsonItem) -> Unit),
-    var deleteHandler: ((jsonItem: JsonItem) -> Unit)
+    var itemHandler: ((jsonItem: JsonItem, pos: Int) -> Unit),
+    var deleteHandler: ((jsonItem: JsonItem, pos: Int) -> Unit)
 ) : RecyclerView.Adapter<JsonListAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemJsonListBinding) : RecyclerView.ViewHolder(binding.root)
@@ -22,10 +21,10 @@ class JsonListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(jsonList[position]) {
-                binding.root.setOnClickListener({clickHandler(this)})
+                binding.root.setOnClickListener { itemHandler(this, position) }
                 binding.jsonItemName.text = this.name
                 binding.jsonItemSelected.isChecked = this.selected
-                binding.jsonItemRemoveBtn.setOnClickListener({deleteHandler(this)})
+                binding.jsonItemRemoveBtn.setOnClickListener { deleteHandler(this, position) }
 
             }
         }

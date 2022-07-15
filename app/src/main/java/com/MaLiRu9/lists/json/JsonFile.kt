@@ -1,6 +1,6 @@
 package com.MaLiRu9.lists.json
 
-class JsonFile {
-    val fileName: String = ""
-    lateinit var list: List<JsonItem>
-}
+class JsonFile(
+    var fileName: String,
+    var list: List<JsonItem>
+)

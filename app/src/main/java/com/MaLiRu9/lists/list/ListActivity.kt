@@ -70,8 +70,5 @@ class ListActivity : AppCompatActivity() {
     private fun addItemToLayout(text: String) {
         val textView = TextView(this)
         textView.text = text
-
-        val listLayout = findViewById<LinearLayout>(R.id.listLayout)
-        listLayout.addView(textView)
     }
 }

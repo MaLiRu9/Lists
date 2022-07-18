@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.MaLiRu9.lists.R
 import com.MaLiRu9.lists.databinding.ActivityLoginBinding
+import com.MaLiRu9.lists.firebase.FirebaseService
 import menu.MenuHandler
 
 class LoginActivity : AppCompatActivity() {
@@ -17,12 +18,7 @@ class LoginActivity : AppCompatActivity() {
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val isLocal = intent.getBooleanExtra("isLocal", true)
-        if (isLocal) {
-            initLocalJSON()
-        } else {
-            initFirebase()
-        }
+        initFirebase()
     }
 
     //Menu
@@ -41,13 +37,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //Firebase
-    fun initFirebase() {
+    private fun initFirebase() {
+        val firebaseService = FirebaseService(this)
+    }
+
+    fun loadFragmentFirebase() {
         var transaction = supportFragmentManager.beginTransaction()
         transaction.replace(binding.loginContainer.id, LoginFormFragment())
         transaction.commit()
-    }
-
-    fun initLocalJSON() {
-
-    }
 }

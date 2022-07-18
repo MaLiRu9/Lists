@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "518033318289",
+    "project_id": "maliru9-lists",
+    "storage_bucket": "maliru9-lists.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518033318289:android:caa487885f310440d37a30",
+        "android_client_info": {
+          "package_name": "com.MaLiRu9.lists"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518033318289-15lg09huee66aaj9j0l820f4dd7uvkca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE734wLxlSyrd35114dYYyVLK2G5HqnsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518033318289-15lg09huee66aaj9j0l820f4dd7uvkca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -19,8 +19,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="large_text">
+    <string name="large_text">Texto largo</string>
 
-    <string name="firebase_id"></string>
+    <string name="firebase_id">518033318289-15lg09huee66aaj9j0l820f4dd7uvkca.apps.googleusercontent.com</string>
 
 </resources>

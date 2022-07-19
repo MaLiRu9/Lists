@@ -7,7 +7,7 @@ import com.MaLiRu9.lists.databinding.ItemListBinding
 import com.MaLiRu9.lists.list.item.Item
 
 class ListAdapter(
-    var list: List<Item>,
+    var list: ToDoList<Item>,
     var moveHandler: ((item: Item, pos: Int) -> Unit),
     var editHandler: ((item: Item, pos: Int) -> Unit)
 ) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {

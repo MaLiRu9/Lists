@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.MaLiRu9.lists.config.ConfigService
 import com.MaLiRu9.lists.list.ListService
+import com.MaLiRu9.lists.list.ToDoList
 import com.MaLiRu9.lists.list.item.Item
 import com.google.gson.GsonBuilder
 import org.json.JSONArray
@@ -14,10 +15,10 @@ class JsonService(val context: Context) {
     val fileExtension = ".json"
 
     fun createJsonFile(name: String, copyExample: Boolean) {
-        var list = mutableListOf<Item>()
+        var list = List<Item>
 
         if (copyExample) {
-            list = getListFromExample()
+            list = getListFromExample().list
         }
 
         //TODO validate name, validate if file exists...
@@ -75,11 +76,19 @@ class JsonService(val context: Context) {
         return list.indexOfFirst { jsonItem -> jsonItem.selected }
     }
 
-    private fun getListFromExample(): MutableList<Item> {
+    fun getSelectedFile(): File {
+        val configService = ConfigService(context)
+        val fileName = configService.getDefaultFileName() + fileExtension
+        val folder = File(context.filesDir, folderName)
+        return File(folder, fileName)
+    }
+
+    private fun getListFromExample(): ToDoList {
         val file = context.assets.open("example.json")
-        val jsonArray = JSONArray(file.bufferedReader().use {
+        val json = file.bufferedReader().use {
             it.readText()
-        })
+        }
+        val gson = GsonBuilder().create()
         val list = ListService(context).parseJson(jsonArray)
         return list
     }

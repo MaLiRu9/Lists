@@ -3,24 +3,56 @@
     "title": "Tarea1",
     "description": "Cosas que tengo que hacer en la tarea 1",
     "check": false,
+    "type": "Checklist",
+    "list": [
+      {
+        "title": "Bread",
+        "check": false
+      },
+      {
+        "title": "Tomatoes",
+        "check": false
+      },
+      {
+        "title": "Oil",
+        "check": true
+      }
+    ],
+    "labels": [],
+    "scheduledDate": "",
+    "modificationDate": "",
     "creationDate": 1657089847702
   },
   {
-    "title": "Tarea2",
-    "description": "Cosas que tengo que hacer en la tarea2",
+    "title": "Appointment",
+    "description": "Example of a basic task with scheduled date.",
     "check": true,
+    "type": "",
+    "labels": [],
+    "scheduledDate": "1660732200000",
+    "modificationDate": "",
     "creationDate": 1657089877175
   },
   {
-    "title": "Tarea3",
-    "description": "Cosas que tengo que hacer en la tarea3",
+    "title": "Voice note",
+    "description": "Example of a task of media type.",
     "check": false,
+    "type": "media",
+    "media": "file_example.mp3",
+    "labels": [],
+    "scheduledDate": "",
+    "modificationDate": "",
     "creationDate": 1657089895375
   },
   {
-    "title": "Tarea4",
-    "description": "Cosas que tengo que hacer en la tarea4",
+    "title": "Visit Canary Islands",
+    "description": "Example of a basic task with geolocation",
     "check": false,
+    "type": "basic",
+    "location": "28.274113222011394, -16.64190733758305",
+    "labels": [],
+    "scheduledDate": "",
+    "modificationDate": "",
     "creationDate": 1657089912159
   }
 ]

@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         val config = ConfigService(this)
 
-        if (!config.getFireBaseActive()) {
+        if (config.getFireBaseActive()) {
             startActivity(Intent(this, LoginActivity::class.java))
         } else {
             val defaultFile = config.getDefaultFileName()

@@ -1,24 +1,54 @@
 package com.MaLiRu9.lists.login
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.MaLiRu9.lists.R
 import com.MaLiRu9.lists.databinding.ActivityLoginBinding
 import com.MaLiRu9.lists.firebase.FirebaseService
+import com.google.android.gms.common.api.ApiException
 import menu.MenuHandler
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var _binding: ActivityLoginBinding
     private val binding get() = _binding
+    private val REQ_ONE_TAP = 1
+    private var showOneTapUI = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initFirebase()
+        //initFirebase()
+
+        val firebaseService = FirebaseService(this)
+
+        var resultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                try {
+                    val credential =
+                        firebaseService.oneTapClient.getSignInCredentialFromIntent(result.data)
+                    val idToken = credential.googleIdToken
+                    Log.d("Debug", "TOKEN: "+idToken.toString())
+                } catch (e: ApiException) {
+                    Log.d("Error", e.message.toString())
+                }
+            }
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     //Menu
@@ -28,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var menuHandler = MenuHandler(this,"login")
+        var menuHandler = MenuHandler(this, "login")
         menuHandler.itemHandler(item)
         if (menuHandler.intent != null) {
             startActivity(menuHandler.intent)
@@ -45,4 +75,5 @@ class LoginActivity : AppCompatActivity() {
         var transaction = supportFragmentManager.beginTransaction()
         transaction.replace(binding.loginContainer.id, LoginFormFragment())
         transaction.commit()
+    }
 }

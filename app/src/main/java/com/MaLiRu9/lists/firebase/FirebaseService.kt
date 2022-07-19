@@ -14,35 +14,32 @@ class FirebaseService(val context: Context) {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
 
-    private lateinit var oneTapClient: SignInClient
-    private lateinit var signInRequest: BeginSignInRequest
+    lateinit var oneTapClient: SignInClient
+    lateinit var signInRequest: BeginSignInRequest
 
-    init{
+    init {
         signIn()
-        auth =Firebase.auth
+        auth = Firebase.auth
     }
 
     private fun signIn() {
-        oneTapClient = Identity.getSignInClient()
+        oneTapClient = Identity.getSignInClient(context)
         signInRequest = BeginSignInRequest.builder()
             .setPasswordRequestOptions(
                 BeginSignInRequest.PasswordRequestOptions.builder()
                     .setSupported(true)
-                    .build())
+                    .build()
+            )
             .setGoogleIdTokenRequestOptions(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
-                    .setServerClientId(R.string.firebase_id.toString())
+                    .setServerClientId(context.getString(R.string.firebase_id))
                     .setFilterByAuthorizedAccounts(true)
-                    .build())
+                    .build()
+            )
             .setAutoSelectEnabled(true)
             .build()
 
-        oneTapClient.beginSignIn((signInRequest))
-            .addOnSuccessListener(context) { result ->
-                try {
-                    context
-                }
-            }
+        //oneTapClient.beginSignIn((signInRequest))
     }
 }

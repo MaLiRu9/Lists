@@ -1,7 +1,6 @@
-package com.MaLiRu9.lists.json
+package com.MaLiRu9.lists.views.listmanagement
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.MaLiRu9.lists.R
 import com.MaLiRu9.lists.databinding.ActivityJsonBinding
+import com.MaLiRu9.lists.json.JsonItem
+import com.MaLiRu9.lists.json.JsonService
 import menu.MenuHandler
 
 class JsonActivity : AppCompatActivity() {

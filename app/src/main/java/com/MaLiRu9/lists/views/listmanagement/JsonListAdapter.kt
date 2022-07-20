@@ -1,9 +1,10 @@
-package com.MaLiRu9.lists.json
+package com.MaLiRu9.lists.views.listmanagement
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.MaLiRu9.lists.databinding.ItemJsonListBinding
+import com.MaLiRu9.lists.json.JsonItem
 
 class JsonListAdapter(
     var jsonList: List<JsonItem>,

@@ -15,12 +15,6 @@ class JsonService(val context: Context) {
     val fileExtension = ".json"
 
     fun createJsonFile(name: String, copyExample: Boolean) {
-        var list = List<Item>
-
-        if (copyExample) {
-            list = getListFromExample().list
-        }
-
         //TODO validate name, validate if file exists...
         val folder = File(context.filesDir, folderName)
         folder.mkdir()
@@ -29,8 +23,12 @@ class JsonService(val context: Context) {
         val file = File(folder, name + fileExtension)
         file.createNewFile()
 
-        val gson = GsonBuilder().setPrettyPrinting().create()
-        val json = gson.toJson(list)
+        var json = "[]"
+        if (copyExample) {
+            val gson = GsonBuilder().setPrettyPrinting().create()
+            val toDoList = getListFromExample()
+            json = gson.toJson(toDoList.list)
+        }
         file.writeText(json)
     }
 
@@ -52,7 +50,7 @@ class JsonService(val context: Context) {
         return files
     }
 
-    fun updateFile(jsonfile: JsonFile) {}
+    fun updateFile() {}
 
     fun deleteFile(json: JsonItem) {
         val folder = File(context.filesDir, folderName)
@@ -89,7 +87,7 @@ class JsonService(val context: Context) {
             it.readText()
         }
         val gson = GsonBuilder().create()
-        val list = ListService(context).parseJson(jsonArray)
+        val list = gson.fromJson(json, ToDoList::class.java)
         return list
     }
 

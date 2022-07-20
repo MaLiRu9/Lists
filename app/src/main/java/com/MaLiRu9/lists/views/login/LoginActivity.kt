@@ -1,4 +1,4 @@
-package com.MaLiRu9.lists.login
+package com.MaLiRu9.lists.views.login
 
 import android.app.Activity
 import android.content.Intent
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.MaLiRu9.lists.R
 import com.MaLiRu9.lists.databinding.ActivityLoginBinding
 import com.MaLiRu9.lists.firebase.FirebaseService
+import com.MaLiRu9.lists.login.LoginFormFragment
 import com.google.android.gms.common.api.ApiException
 import menu.MenuHandler
 
@@ -38,17 +39,15 @@ class LoginActivity : AppCompatActivity() {
                     val credential =
                         firebaseService.oneTapClient.getSignInCredentialFromIntent(result.data)
                     val idToken = credential.googleIdToken
-                    Log.d("Debug", "TOKEN: "+idToken.toString())
+                    Log.d("Debug", "TOKEN: " + idToken.toString())
                 } catch (e: ApiException) {
                     Log.d("Error", e.message.toString())
                 }
+            } else {
+                Log.d("Debug", "CODE: " + result.resultCode)
             }
         }
 
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     //Menu
@@ -69,11 +68,5 @@ class LoginActivity : AppCompatActivity() {
     //Firebase
     private fun initFirebase() {
         val firebaseService = FirebaseService(this)
-    }
-
-    fun loadFragmentFirebase() {
-        var transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(binding.loginContainer.id, LoginFormFragment())
-        transaction.commit()
     }
 }

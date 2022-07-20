@@ -4,10 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
 import com.MaLiRu9.lists.R
-import com.MaLiRu9.lists.config.ConfigActivity
-import com.MaLiRu9.lists.json.JsonActivity
+import com.MaLiRu9.lists.views.config.ConfigActivity
+import com.MaLiRu9.lists.views.listmanagement.JsonActivity
 import com.MaLiRu9.lists.list.ListActivity
-import com.MaLiRu9.lists.login.LoginActivity
+import com.MaLiRu9.lists.views.login.LoginActivity
 
 class MenuHandler constructor(val context:Context, val current: String) {
     var intent:Intent? = null

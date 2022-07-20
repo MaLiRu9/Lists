@@ -20,9 +20,9 @@ class ListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityListBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_list)
+        setContentView(binding.root)
 
-        val list = ListService(this).list
+        val list = ListService(this).toDoList.list
         val listAdapter = ListAdapter(
             list,
             { item, pos -> moveHandler(item, pos) },

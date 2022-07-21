@@ -10,8 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.MaLiRu9.lists.R
 import com.MaLiRu9.lists.databinding.ActivityLoginBinding
-import com.MaLiRu9.lists.firebase.FirebaseService
-import com.MaLiRu9.lists.login.LoginFormFragment
+import com.MaLiRu9.lists.storage.firebase.FirebaseService
 import com.google.android.gms.common.api.ApiException
 import menu.MenuHandler
 

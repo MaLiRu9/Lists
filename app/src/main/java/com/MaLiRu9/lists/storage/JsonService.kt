@@ -1,13 +1,10 @@
-package com.MaLiRu9.lists.json
+package com.MaLiRu9.lists.storage
 
 import android.content.Context
 import android.util.Log
 import com.MaLiRu9.lists.config.ConfigService
-import com.MaLiRu9.lists.list.ListService
 import com.MaLiRu9.lists.list.ToDoList
-import com.MaLiRu9.lists.list.item.Item
 import com.google.gson.GsonBuilder
-import org.json.JSONArray
 import java.io.File
 
 class JsonService(val context: Context) {

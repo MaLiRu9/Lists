@@ -1,4 +1,4 @@
-package com.MaLiRu9.lists.firebase
+package com.MaLiRu9.lists.storage.firebase
 
 import android.content.Context
 import com.MaLiRu9.lists.R

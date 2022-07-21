@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.MaLiRu9.lists.databinding.ItemJsonListBinding
-import com.MaLiRu9.lists.json.JsonItem
+import com.MaLiRu9.lists.storage.JsonItem
 
 class JsonListAdapter(
     var jsonList: List<JsonItem>,

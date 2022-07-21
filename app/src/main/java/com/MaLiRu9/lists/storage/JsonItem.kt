@@ -1,4 +1,4 @@
-package com.MaLiRu9.lists.json
+package com.MaLiRu9.lists.storage
 
 class JsonItem(
     val name: String,

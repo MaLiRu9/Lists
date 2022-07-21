@@ -1,9 +1,10 @@
-package com.MaLiRu9.lists.list.item
+package com.MaLiRu9.lists.entities
 
-import java.text.SimpleDateFormat
+import com.MaLiRu9.lists.list.item.ItemTypes
+import com.MaLiRu9.lists.list.item.SubItem
 import java.time.Instant
 
-data class Item(
+class Note (
     val title: String,
 
     val type: ItemTypes = ItemTypes.basic,
@@ -18,14 +19,4 @@ data class Item(
 
     val media: String? = null,
     val list: List<SubItem>? = emptyList()
-) {
-
-    fun getCreationDate(): String {
-        return getFormattedDate(creationDate)
-    }
-
-    fun getFormattedDate(date: Long): String {
-        val format = SimpleDateFormat("dd-MM-yyyy")
-        return format.format(date)
-    }
-}
+)
